@@ -258,4 +258,21 @@ public class CircularLinkedList implements List {
         //agregamos la info del último nodo
         return result+aux.data;
     }
+
+    public String show(){
+        if(isEmpty()) return "Circular Linked List is empty";
+        String result ="";
+        Node aux = first; //aux para moverme por la lista y no perder el puntero al inicio
+        while(aux!=last){
+            result+=aux.data+"\n";
+            aux = aux.next; //lo muevo al sgte nodo
+        }
+        //se sale cuando aux==last
+        //agregamos la info del último nodo
+        return result+aux.data;
+    }
+
+
+
+
 }

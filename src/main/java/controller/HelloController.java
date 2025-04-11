@@ -48,7 +48,7 @@ public class HelloController {
 
     @FXML
     public void studentsOnAction(ActionEvent actionEvent) {
-        load("student.fxml");
+        load("employee.fxml");
     }
 
     @FXML

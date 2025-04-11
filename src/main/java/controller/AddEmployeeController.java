@@ -1,15 +1,14 @@
 package controller;
 
-import domain.ListException;
+import domain.CircularLinkedList;
 import domain.SinglyLinkedList;
-import domain.Student;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
-public class AddStudentController
+public class AddEmployeeController
 {
     @javafx.fxml.FXML
     private TextField textFieldName;
@@ -22,13 +21,13 @@ public class AddStudentController
     @javafx.fxml.FXML
     private BorderPane bp;
     //defino la lista enlazada interna
-    private SinglyLinkedList studentList;
+    private CircularLinkedList employeeList;
     private Alert alert; //para el manejo de alertas
 
     @javafx.fxml.FXML
     public void initialize() {
         //cargamos la lista general
-        this.studentList = util.Utility.getStudentList();
+        this.employeeList = util.Utility.getEmployeeList();
         alert = util.FXUtility.alert("Student List", "Add Student");
     }
 
@@ -46,6 +45,6 @@ public class AddStudentController
 
     @javafx.fxml.FXML
     public void closeOnAction(ActionEvent actionEvent) {
-        util.FXUtility.loadPage("ucr.lab.HelloApplication", "student.fxml", bp);
+        util.FXUtility.loadPage("ucr.lab.HelloApplication", "employee.fxml", bp);
     }
 }

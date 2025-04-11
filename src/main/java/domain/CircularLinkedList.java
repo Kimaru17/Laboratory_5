@@ -89,7 +89,7 @@ public class CircularLinkedList implements List {
         //Caso 1: El elemento a suprimir es el primero de la lista
         if(util.Utility.compare(first.data, element)==0)
             first = first.next;
-        //Caso 2. El elemento puede estar en el medio o al final
+            //Caso 2. El elemento puede estar en el medio o al final
         else{
             Node prev = first; //nodo anterior
             Node aux = first.next; //nodo sgte
@@ -156,6 +156,44 @@ public class CircularLinkedList implements List {
         for (int i = 1; i<=size(); i++) {
             for (int j = i+1; j<=size() ; j++) {
                 if(util.Utility.compare(getNode(j).data, getNode(i).data)<0){
+                    Object aux = getNode(i).data;
+                    getNode(i).data = getNode(j).data;
+                    getNode(j).data = aux;
+                }
+            }
+        }
+    }
+    public void sortByFirstName() throws ListException {
+        if (isEmpty()) {
+            throw new ListException("Circular Linked List is empty");
+        }
+
+        for (int i = 1; i <= size(); i++) {
+            for (int j = i + 1; j <= size(); j++) {
+                Employee empI = (Employee) getNode(i).data;
+                Employee empJ = (Employee) getNode(j).data;
+
+                if (util.Utility.compare(empJ.getFirstName(), empI.getFirstName()) < 0) {
+                    // Intercambiar los datos
+                    Object aux = getNode(i).data;
+                    getNode(i).data = getNode(j).data;
+                    getNode(j).data = aux;
+                }
+            }
+        }
+    }
+    public void sortById() throws ListException {
+        if (isEmpty()) {
+            throw new ListException("Circular Linked List is empty");
+        }
+
+        for (int i = 1; i <= size(); i++) {
+            for (int j = i + 1; j <= size(); j++) {
+                Employee empI = (Employee) getNode(i).data;
+                Employee empJ = (Employee) getNode(j).data;
+
+                if (empJ.getId() < empI.getId()) {
+                    // Intercambiar los datos
                     Object aux = getNode(i).data;
                     getNode(i).data = getNode(j).data;
                     getNode(j).data = aux;
@@ -258,21 +296,14 @@ public class CircularLinkedList implements List {
         //agregamos la info del último nodo
         return result+aux.data;
     }
+    public Object getObject(int i){
+        Node aux = first;
+        Employee r = (Employee) aux.data;
+        while(aux!=null){
+            if (i == ((Employee) aux.data).getId()) return aux.data;
 
-    public String show(){
-        if(isEmpty()) return "Circular Linked List is empty";
-        String result ="";
-        Node aux = first; //aux para moverme por la lista y no perder el puntero al inicio
-        while(aux!=last){
-            result+=aux.data+"\n";
             aux = aux.next; //lo muevo al sgte nodo
         }
-        //se sale cuando aux==last
-        //agregamos la info del último nodo
-        return result+aux.data;
+        return null;
     }
-
-
-
-
 }

@@ -50,8 +50,6 @@ class CircularDoublyLinkedListTest {
         } catch (ListException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
 

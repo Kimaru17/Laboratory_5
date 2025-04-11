@@ -5,12 +5,13 @@ import domain.Employee;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
 public class Utility {
     private static final Random random;
-   private static CircularLinkedList employeeList;
+    private static CircularLinkedList employeeList;
 
     //constructor estatico, inicializador estatico
     static {
@@ -82,6 +83,14 @@ public class Utility {
         }
         return 2; //Unknown
     }
+    public static boolean isInteger(String text) {
+        try {
+            Integer.parseInt(text);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 
     public static String instanceOf(Object a, Object b){
         if(a instanceof Integer && b instanceof Integer) return "Integer";
@@ -89,6 +98,23 @@ public class Utility {
         if(a instanceof Character && b instanceof Character) return "Character";
         if(a instanceof Employee && b instanceof Employee) return "Employee";
         return "Unknown";
+    }
+    public static int getAge(Date date) {
+        if (date == null) return 0;
+
+        Calendar birthCal = Calendar.getInstance();
+        birthCal.setTime(date);
+
+        Calendar todayCal = Calendar.getInstance();
+
+        int age = todayCal.get(Calendar.YEAR) - birthCal.get(Calendar.YEAR);
+
+        // Verificar si el cumpleaños ya pasó este año
+        if (todayCal.get(Calendar.DAY_OF_YEAR) < birthCal.get(Calendar.DAY_OF_YEAR)) {
+            age--;
+        }
+
+        return age;
     }
 
     public static String dateFormat(Date value){

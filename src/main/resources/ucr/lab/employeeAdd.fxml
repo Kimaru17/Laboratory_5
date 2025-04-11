@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="bp"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.EmployeeController"
+            prefHeight="594.0" prefWidth="747.0">
+    <center>
+        <Pane prefHeight="463.0" prefWidth="749.0" style="-fx-background-color: #B2DFDB;" BorderPane.alignment="CENTER">
+            <children>
+                <Label layoutX="154.0" layoutY="148.0" text="Employee ID:">
+                    <font>
+                        <Font name="Arial" size="20.0" />
+                    </font>
+                </Label>
+                <Label layoutX="154.0" layoutY="216.0" text="Birthday:">
+                    <font>
+                        <Font name="Arial" size="20.0" />
+                    </font>
+                </Label>
+
+                <TextField fx:id="tf_employeeId" layoutX="306.0" layoutY="142.0" prefHeight="37.0" prefWidth="58.0" />
+                <DatePicker fx:id="birthday" layoutX="306.0" layoutY="210.0" prefHeight="36.0" prefWidth="151.0" />
+                <Pane layoutY="489.0" prefHeight="102.0" prefWidth="747.0" style="-fx-background-color: #4DB6AC;">
+                    <children>
+                        <Button layoutX="139.0" layoutY="14.0" mnemonicParsing="false" onAction="#addOnAction" prefHeight="57.0" prefWidth="114.0" text="Add">
+                            <font>
+                                <Font name="Arial" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="318.0" layoutY="15.0" mnemonicParsing="false" onAction="#cleanOnAction" prefHeight="57.0" prefWidth="114.0" text="Clean">
+                            <font>
+                                <Font name="Arial" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="495.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeOnAction" prefHeight="57.0" prefWidth="114.0" text="Close">
+                            <font>
+                                <Font name="Arial" size="18.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </Pane>
+                <Pane prefHeight="121.0" prefWidth="747.0" style="-fx-background-color: #00796B;">
+                    <children>
+                        <Label layoutX="281.0" layoutY="42.0" text="Add Employee">
+                            <font>
+                                <Font name="Arial" size="40.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </Pane>
+            <Label layoutX="154.0" layoutY="285.0" text="Last Name:">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tf_lastName" layoutX="306.0" layoutY="279.0" prefHeight="37.0" prefWidth="173.0" />
+            <Label layoutX="154.0" layoutY="353.0" text="First Name:">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tf_firstName" layoutX="306.0" layoutY="347.0" prefHeight="37.0" prefWidth="172.0" />
+            <Label layoutX="154.0" layoutY="421.0" text="Title:">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tf_title" layoutX="306.0" layoutY="415.0" prefHeight="37.0" prefWidth="170.0" />
+            </children>
+        </Pane>
+    </center>
+</BorderPane>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="bp" prefHeight="594.0" prefWidth="747.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.staffAddController">
+    <center>
+        <Pane prefHeight="463.0" prefWidth="749.0" style="-fx-background-color: #B2DFDB;" BorderPane.alignment="CENTER">
+            <children>
+                <Label layoutX="154.0" layoutY="148.0" text="Register ID:">
+                    <font>
+                        <Font name="Arial" size="20.0" />
+                    </font>
+                </Label>
+                <Label layoutX="154.0" layoutY="216.0" text="Date:">
+                    <font>
+                        <Font name="Arial" size="20.0" />
+                    </font>
+                </Label>
+
+                <TextField fx:id="tf_StaffId" editable="false" layoutX="306.0" layoutY="142.0" prefHeight="37.0" prefWidth="58.0" />
+                <DatePicker fx:id="date" layoutX="306.0" layoutY="210.0" prefHeight="36.0" prefWidth="151.0" />
+                <Pane layoutY="489.0" prefHeight="102.0" prefWidth="747.0" style="-fx-background-color: #4DB6AC;">
+                    <children>
+                        <Button layoutX="139.0" layoutY="14.0" mnemonicParsing="false" onAction="#addOnAction" prefHeight="57.0" prefWidth="114.0" text="Add">
+                            <font>
+                                <Font name="Arial" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="318.0" layoutY="15.0" mnemonicParsing="false" onAction="#cleanOnAction" prefHeight="57.0" prefWidth="114.0" text="Clean">
+                            <font>
+                                <Font name="Arial" size="18.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="495.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeOnAction" prefHeight="57.0" prefWidth="114.0" text="Close">
+                            <font>
+                                <Font name="Arial" size="18.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </Pane>
+                <Pane prefHeight="121.0" prefWidth="747.0" style="-fx-background-color: #00796B;">
+                    <children>
+                        <Label layoutX="281.0" layoutY="42.0" text="Add Staff">
+                            <font>
+                                <Font name="Arial" size="40.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </Pane>
+            <Label layoutX="154.0" layoutY="285.0" text="Select Employee:">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="154.0" layoutY="328.0" text="Select Job Position:">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="cbEmployee" layoutX="365.0" layoutY="285.0" prefHeight="25.0" prefWidth="184.0" />
+            <ChoiceBox fx:id="cbJob" layoutX="365.0" layoutY="327.0" prefHeight="25.0" prefWidth="184.0" />
+            <Label layoutX="153.0" layoutY="368.0" text="Select Supervisor:">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="cbSupervisor" layoutX="365.0" layoutY="367.0" prefHeight="25.0" prefWidth="184.0" />
+            <Label layoutX="154.0" layoutY="404.0" text="Select an Assig. Type:">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="cbAssigType" layoutX="365.0" layoutY="403.0" prefHeight="25.0" prefWidth="184.0" />
+            </children>
+        </Pane>
+    </center>
+</BorderPane>

@@ -5,6 +5,7 @@ import domain.Employee;
 import domain.ListException;
 import domain.SinglyLinkedList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -15,19 +16,19 @@ import java.util.Date;
 
 public class EmployeeController
 {
-    @javafx.fxml.FXML
-    private TableView <Employee> employeeTableview;
-    @javafx.fxml.FXML
-    private TableColumn <Employee, Integer> idTableColumn;
-    @javafx.fxml.FXML
+    @FXML
     private BorderPane bp;
-    @javafx.fxml.FXML
+    @FXML
+    private TableView <Employee> employeeTableview;
+    @FXML
+    private TableColumn <Employee, Integer> idTableColumn;
+    @FXML
     private TableColumn <Employee, String> titleTableColumn;
-    @javafx.fxml.FXML
+    @FXML
     private TableColumn <Employee, String> firstNameTableColumn;
-    @javafx.fxml.FXML
+    @FXML
     private TableColumn <Employee, String> lastNameTableColumn;
-    @javafx.fxml.FXML
+    @FXML
     private TableColumn <Employee, Date> birthdayTableColumn;
     //defino la lista enlazada interna
     private CircularLinkedList employeeList;

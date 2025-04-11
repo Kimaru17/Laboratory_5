@@ -25,7 +25,7 @@
                 </Pane>
                 <Pane layoutX="3.0" layoutY="86.0" prefHeight="367.0" prefWidth="798.0">
                     <children>
-                        <TableView fx:id="employeeTableview" layoutX="15.0" layoutY="14.0" prefHeight="350.0" prefWidth="761.0">
+                        <TableView fx:id="staffingTableview" layoutX="15.0" layoutY="14.0" prefHeight="350.0" prefWidth="761.0">
                             <columns>
                                 <TableColumn fx:id="idTableColumn" prefWidth="115.19995498657227" text="Id" />
                                 <TableColumn fx:id="dateTableColumn" prefWidth="73.0" text="Date" />

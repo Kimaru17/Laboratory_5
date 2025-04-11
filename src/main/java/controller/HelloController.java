@@ -46,18 +46,32 @@ public class HelloController {
 
     }
 
-    @FXML
+    @Deprecated
     public void studentsOnAction(ActionEvent actionEvent) {
         load("employee.fxml");
     }
 
-    @FXML
+    @Deprecated
     public void registerOnAction(ActionEvent actionEvent) {
         load("register.fxml");
     }
 
-    @FXML
+    @Deprecated
     public void coursesOnAction(ActionEvent actionEvent) {
         load("course.fxml");
+    }
+
+    @FXML
+    public void jobpositionOnAction(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void staffingOnAction(ActionEvent actionEvent) {
+        load("staffing.fxml");
+    }
+
+    @FXML
+    public void employeesOnAction(ActionEvent actionEvent) {
+        load("employee.fxml");
     }
 }

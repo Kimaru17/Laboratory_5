@@ -12,6 +12,7 @@ import java.util.Random;
 public class Utility {
     private static final Random random;
     private static CircularLinkedList employeeList;
+    private static CircularDoublyLinkedList jobpositionlist;
 
     //constructor estatico, inicializador estatico
     static {
@@ -19,15 +20,18 @@ public class Utility {
         long seed = System.currentTimeMillis();
         random = new Random(seed);
         employeeList = new CircularLinkedList();
+        jobpositionlist = new CircularDoublyLinkedList();
     }
 
     public static CircularLinkedList getEmployeeList() {
         return employeeList;
     }
-
     public static void setEmployeeList(CircularLinkedList employeeList) {
         Utility.employeeList = employeeList;
     }
+
+    public static CircularDoublyLinkedList getJobposition(){return jobpositionlist;}
+    public static void setJobposition(CircularDoublyLinkedList jobpositionList){Utility.jobpositionlist = jobpositionList;}
 
     public static int random(int bound){
         //return (int)Math.floor(Math.random()*bound); //forma 1
@@ -80,6 +84,10 @@ public class Utility {
                 return emp1.getId() < emp2.getId() ? -1
                         :  emp1.getId() > emp2.getId() ? 1 : 0;
 
+            case "JobPosition":
+                JobPosition jp1 = (JobPosition) a; JobPosition jp2 = (JobPosition) b;
+                return jp1.getId() < jp2.getId() ? -1
+                        : jp1.getId() > jp2.getId() ? 1 : 0;
         }
         return 2; //Unknown
     }
@@ -97,6 +105,7 @@ public class Utility {
         if(a instanceof String && b instanceof String) return "String";
         if(a instanceof Character && b instanceof Character) return "Character";
         if(a instanceof Employee && b instanceof Employee) return "Employee";
+        if(a instanceof JobPosition  && b instanceof JobPosition ) return "JobPosition ";
         return "Unknown";
     }
     public static int getAge(Date date) {

@@ -20,6 +20,10 @@ public class JobPosition {
         this.hourlyWage = hourlyWage;
     }
 
+    public double getSalary(double n) {
+        return n * hourlyWage;
+    }
+
     //Constructor 3
     public JobPosition(int id) {
         this.id = id;

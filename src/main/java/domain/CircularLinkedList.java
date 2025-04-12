@@ -78,8 +78,36 @@ public class CircularLinkedList implements List {
     }
 
     @Override
-    public void addInSortedList(Object element) {
-
+    public void addInSortedList(Object element) throws ListException {
+        if (element == null)
+            throw new ListException("Cannot add null to the list.");
+        Employee newEmployee = (Employee) element;
+        // caso 1 donde la lista es vacía
+        if (isEmpty()) {
+            add(newEmployee); // ya configura first y last correctamente
+            return;
+        }
+        Node newNode = new Node(newEmployee);
+        // caso 2 donde el nuevo nodo va al inicio
+        Employee firstEmployee = (Employee) first.data;
+        if (newEmployee.getId() < firstEmployee.getId()) {
+            newNode.next = first;
+            first = newNode;
+            last.next = first; // mantener circularidad
+            return;
+        }
+        // caso 3 el insertar en posición ordenada en el medio o al final
+        Node current = first;
+        while (current.next != first && ((Employee) current.next.data).getId() < newEmployee.getId()) {
+            current = current.next;
+        }
+        // insertar después de current
+        newNode.next = current.next;
+        current.next = newNode;
+        // si se insertó al final, actualizar last
+        if (current == last) {
+            last = newNode;
+        }
     }
 
     @Override

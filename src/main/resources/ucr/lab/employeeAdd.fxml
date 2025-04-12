@@ -11,7 +11,7 @@
 <BorderPane fx:id="bp"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.EmployeeController"
+            fx:controller="controller.EmployeeAdd"
             prefHeight="594.0" prefWidth="747.0">
     <center>
         <Pane prefHeight="463.0" prefWidth="749.0" style="-fx-background-color: #B2DFDB;" BorderPane.alignment="CENTER">

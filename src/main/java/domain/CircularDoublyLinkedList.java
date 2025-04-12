@@ -86,8 +86,40 @@ public class CircularDoublyLinkedList implements List {
     }
 
     @Override
-    public void addInSortedList(Object element) {
-
+    public void addInSortedList(Object element) throws ListException {
+        if (element == null)
+            throw new ListException("Cannot add null element");
+        Employee newEmployee = (Employee) element;
+        Node newNode = new Node(newEmployee);
+        if (isEmpty()) {
+            first = last = newNode;
+            first.next = first;
+            first.prev = first;
+            return;
+        }
+        Employee firstEmp = (Employee) first.data;
+        //insertar al inicio
+        if (newEmployee.getId() < firstEmp.getId()) {
+            newNode.next = first;
+            newNode.prev = last;
+            first.prev = newNode;
+            last.next = newNode;
+            first = newNode;
+            return;
+        }
+        Node current = first;
+        while (current.next != first && ((Employee) current.next.data).getId() < newEmployee.getId()) {
+            current = current.next;
+        }
+        // insertar después de current
+        newNode.next = current.next;
+        newNode.prev = current;
+        current.next.prev = newNode;
+        current.next = newNode;
+        // si fue insertado al final
+        if (current == last) {
+            last = newNode;
+        }
     }
 
     @Override
@@ -269,5 +301,26 @@ public class CircularDoublyLinkedList implements List {
         //se sale cuando aux==last
         //agregamos la info del último nodo
         return result+aux.data;
+    }
+
+    public void sortByName() throws ListException {
+        if (isEmpty()) {
+            throw new ListException("Circular Linked List is empty");
+        }
+
+        for (int i = 1; i <= size(); i++) {
+            for (int j = i + 1; j <= size(); j++) {
+                JobPosition jobI = (JobPosition) getNode(i).data; // Obtener el JobPosition en la posición i
+                JobPosition jobJ = (JobPosition) getNode(j).data; // Obtener el JobPosition en la posición j
+
+                // Comparamos las descripciones alfabéticamente
+                if (util.Utility.compare(jobJ.getDescription(), jobI.getDescription()) < 0) {
+                    // Si la descripción de jobJ es menor (alfabéticamente), intercambiamos los datos
+                    Object aux = getNode(i).data;
+                    getNode(i).data = getNode(j).data;
+                    getNode(j).data = aux;
+                }
+            }
+        }
     }
 }

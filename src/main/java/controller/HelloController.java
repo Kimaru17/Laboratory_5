@@ -47,17 +47,16 @@ public class HelloController {
     }
 
     @FXML
-    public void studentsOnAction(ActionEvent actionEvent) {
+    public void jobpositionOnAction(ActionEvent actionEvent) {
+        load("jobposition.fxml");
+    }
+
+    @FXML
+    public void staffingOnAction(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void employeesOnAction(ActionEvent actionEvent) {
         load("employee.fxml");
-    }
-
-    @FXML
-    public void registerOnAction(ActionEvent actionEvent) {
-        load("register.fxml");
-    }
-
-    @FXML
-    public void coursesOnAction(ActionEvent actionEvent) {
-        load("course.fxml");
     }
 }

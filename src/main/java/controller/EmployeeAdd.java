@@ -9,9 +9,13 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Calendar;
 import java.util.Date;
 
 public class EmployeeAdd
@@ -38,6 +42,7 @@ public class EmployeeAdd
         //cargamos la lista general
         this.employeeList = util.Utility.getEmployeeList();
         alert = util.FXUtility.alert("Employee List", "Add Employee");
+        aplicarFormatoDatePicker(birthday);
     }
 
     @javafx.fxml.FXML
@@ -88,18 +93,76 @@ public class EmployeeAdd
         this.tf_lastName.setText("");
         this.tf_firstName.setText("");
         this.tf_title.setText("");
+        birthday.getEditor().clear();
         birthday.setValue(null);
     }
 
     @javafx.fxml.FXML
     public void closeOnAction(ActionEvent actionEvent) {
-//        util.FXUtility.loadPage("ucr.lab.HelloApplication", "employee.fxml", bp);
-        util.FXUtility.loadPage("lab5.laboratory5.HelloApplication", "employee.fxml", bp);
+        util.FXUtility.loadPage("ucr.lab.HelloApplication", "/ucr/lab/employee.fxml", bp);
     }
 
     //verificar que no falte ningun dato en los tf
     private boolean employeeIsValid() throws ListException {
+        boolean error=false;
+        LocalDate today = LocalDate.now();
+        if (birthday.getValue() == null || birthday.getValue().isAfter(today)) {
+            error=true;
+        }
         return !(this.tf_employeeId.getText().isEmpty()) && !(this.tf_lastName.getText().isEmpty())
-                && !(this.tf_firstName.getText().isEmpty()) && !(this.tf_title.getText().isEmpty()) && util.Utility.isInteger(this.tf_employeeId.getText());
+                && !(this.tf_firstName.getText().isEmpty()) && !(this.tf_title.getText().isEmpty()) && util.Utility.isInteger(this.tf_employeeId.getText())
+                && !error;
     }
+
+    private void aplicarFormatoDatePicker(DatePicker datePicker) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        datePicker.setPromptText("dd/MM/yyyy");
+
+        datePicker.setConverter(new javafx.util.StringConverter<>() {
+            @Override
+            public String toString(LocalDate date) {
+                return (date != null) ? formatter.format(date) : "";
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                if (string == null || string.trim().isEmpty()) {
+                    return null;
+                }
+                try {
+                    return LocalDate.parse(string, formatter);
+                } catch (DateTimeParseException e) {
+                    alert.setAlertType(Alert.AlertType.WARNING);
+                    alert.setContentText("Invalid date format. Use dd/MM/yyyy.\nExample: 10/04/2003");
+                    alert.showAndWait();
+                    datePicker.getEditor().clear();
+                    datePicker.setValue(null);
+                    return null;
+                }
+            }
+        });
+
+        // Forzar validación al perder el foco
+        datePicker.getEditor().focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+            if (!isNowFocused) {
+                String text = datePicker.getEditor().getText();
+                if (text != null && !text.trim().isEmpty()) {
+                    try {
+                        LocalDate parsedDate = LocalDate.parse(text, formatter);
+                        datePicker.setValue(parsedDate);
+                    } catch (DateTimeParseException e) {
+                        alert.setAlertType(Alert.AlertType.WARNING);
+                        alert.setContentText("Invalid date format. Use dd/MM/yyyy.\nExample: 10/04/2003");
+                        alert.showAndWait();
+                        datePicker.getEditor().clear();
+                        datePicker.setValue(null);
+                    }
+                }
+            }
+        });
+    }
+
+
+
 }

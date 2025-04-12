@@ -110,19 +110,14 @@ public class Utility {
     }
     public static int getAge(Date date) {
         if (date == null) return 0;
-
         Calendar birthCal = Calendar.getInstance();
         birthCal.setTime(date);
-
         Calendar todayCal = Calendar.getInstance();
-
         int age = todayCal.get(Calendar.YEAR) - birthCal.get(Calendar.YEAR);
-
         // Verificar si el cumpleaños ya pasó este año
         if (todayCal.get(Calendar.DAY_OF_YEAR) < birthCal.get(Calendar.DAY_OF_YEAR)) {
             age--;
         }
-
         return age;
     }
 

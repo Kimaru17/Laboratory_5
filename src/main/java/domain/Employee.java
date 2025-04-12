@@ -1,19 +1,20 @@
 package domain;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Employee {
-    public int id;
-    public String lastName;
-    public String firstName;
-    public String tittle;
+    private int id;
+    private String lastName;
+    private String firstName;
+    private String title;
     private Date birthday;
 
-    public Employee(int id, String lastName, String firstName, String tittle, Date birthday) {
+    public Employee(int id, String lastName, String firstName, String title, Date birthday) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
-        this.tittle = tittle;
+        this.title = title;
         this.birthday = birthday;
     }
 
@@ -45,12 +46,12 @@ public class Employee {
         this.firstName = firstName;
     }
 
-    public String getTittle() {
-        return tittle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Date getBirthday() {
@@ -61,20 +62,19 @@ public class Employee {
         this.birthday = birthday;
     }
 
-    public int getAge(Date birthDate) {
-        long ageInMillis = new Date().getTime() - birthDate.getTime();
-        long millisInYear = 1000L * 60 * 60 * 24 * 365;
-        return (int)(ageInMillis / millisInYear);
+    public int getAge(Date date){
+        //implementar el metodo getAge en la clase utility
+        return util.Utility.getAge(date);
     }
 
     public int getAge(){
-        return getAge(birthday);
+        return getAge(this.getBirthday());
     }
 
     @Override
     public String toString() {
-        return  "(ID)"+id +"/(Name)"+lastName+", "+firstName
-                + "/(Birthday)"+util.Utility.dateFormat(birthday)+ "/(Title)"+tittle
+        return "(ID)"+id +"/(Name)"+getLastName()+", "+getFirstName()
+                + "/(Birthday)"+util.Utility.dateFormat(birthday)+ "/(Title)"+title
                 +"/(Age)"+ getAge(birthday);
     }
 }

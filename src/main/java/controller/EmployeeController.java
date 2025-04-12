@@ -118,7 +118,7 @@ public class EmployeeController
 
 
                         if (employeeList.isEmpty()) {
-                            util.FXUtility.loadPage("lab5.laboratory5.HelloApplication", "employee.fxml", bp);
+                            util.FXUtility.loadPage("ucr.lab.HelloApplication", "/ucr/lab/employee.fxml", bp);
                         }
                     } else {
                         alert.setAlertType(Alert.AlertType.ERROR);
@@ -382,7 +382,7 @@ public class EmployeeController
         return !(this.employeeTableview.getItems().isEmpty());
     }
 
-    private void updateTableView() throws ListException {
+    public void updateTableView() throws ListException {
         this.employeeTableview.getItems().clear(); //clear table
         this.employeeList = util.Utility.getEmployeeList(); //cargo la lista
         if(employeeList!=null && !employeeList.isEmpty()){

@@ -82,7 +82,7 @@ class CircularLinkedListTest {
         String result = msg + "\n";
         for (int i = 1; i <= list.size(); i++) {
             Employee e = (Employee) list.getNode(i).data;
-            if (util.Utility.compare(e.getTittle(), title) == 0) {
+            if (util.Utility.compare(e.getTitle(), title) == 0) {
                 result += e + "\n";
             }
         }

@@ -89,8 +89,8 @@ public class CircularDoublyLinkedList implements List {
     public void addInSortedList(Object element) throws ListException {
         if (element == null)
             throw new ListException("Cannot add null element");
-        Employee newEmployee = (Employee) element;
-        Node newNode = new Node(newEmployee);
+        JobPosition newJobPosition = (JobPosition) element;
+        Node newNode = new Node(newJobPosition);
         if (isEmpty()) {
             first = last = newNode;
             first.next = first;
@@ -99,7 +99,7 @@ public class CircularDoublyLinkedList implements List {
         }
         Employee firstEmp = (Employee) first.data;
         //insertar al inicio
-        if (newEmployee.getId() < firstEmp.getId()) {
+        if (newJobPosition.getId() < firstEmp.getId()) {
             newNode.next = first;
             newNode.prev = last;
             first.prev = newNode;
@@ -108,7 +108,7 @@ public class CircularDoublyLinkedList implements List {
             return;
         }
         Node current = first;
-        while (current.next != first && ((Employee) current.next.data).getId() < newEmployee.getId()) {
+        while (current.next != first && ((Employee) current.next.data).getId() < newJobPosition.getId()) {
             current = current.next;
         }
         // insertar después de current

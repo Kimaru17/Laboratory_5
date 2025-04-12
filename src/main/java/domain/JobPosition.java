@@ -5,6 +5,8 @@ public class JobPosition {
     private String description;
     private double hourlyWage;
     private static int autoId; //para el autogenerado
+    private int totalHours;
+    private double salary;
 
     //Constructor 1
     public JobPosition(int id, String description, double hourlyWage) {
@@ -20,8 +22,13 @@ public class JobPosition {
         this.hourlyWage = hourlyWage;
     }
 
+
+
     public double getSalary(double n) {
         return n * hourlyWage;
+    }
+    public double getSalary(){
+        return getSalary(this.totalHours);
     }
 
     //Constructor 3
@@ -59,6 +66,14 @@ public class JobPosition {
 
     public static void setAutoId(int autoId) {
         JobPosition.autoId = autoId;
+    }
+
+    public int getTotalHours() {
+        return totalHours;
+    }
+
+    public void setTotalHours(int totalHours) {
+        this.totalHours = totalHours;
     }
 
     @Override

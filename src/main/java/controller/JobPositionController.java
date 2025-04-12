@@ -1,6 +1,7 @@
 package controller;
 
 import domain.CircularDoublyLinkedList;
+import domain.Employee;
 import domain.JobPosition;
 import domain.ListException;
 import javafx.collections.FXCollections;
@@ -29,29 +30,38 @@ public class JobPositionController
     @javafx.fxml.FXML
     private TableColumn hWagesTableColumn;
     @javafx.fxml.FXML
-    private TableColumn mWagesTableColumn;
+    private TableColumn <JobPosition,Double> mWagesTableColumn;
     @javafx.fxml.FXML
     private BorderPane bp;
 
     private CircularDoublyLinkedList jobpositionList;
     private Alert alert;
 
-    @FXML
     public void initialize() {
+
         this.jobpositionList = Utility.getJobposition();
         alert = FXUtility.alert("Job Position List", "Display Job");
-        alert.setAlertType(Alert.AlertType.ERROR);
         idTableColumn.setCellValueFactory(new PropertyValueFactory<>("Id"));
-        tHoursTableColumn.setCellValueFactory(new PropertyValueFactory<>("Total Hours"));
         descriptionTableColumn.setCellValueFactory(new PropertyValueFactory<>("Description"));
-        hWagesTableColumn.setCellValueFactory(new PropertyValueFactory<>("Hour Wages"));
-        mWagesTableColumn.setCellValueFactory(new PropertyValueFactory<>("Monthly Wages"));
-
+        hWagesTableColumn.setCellValueFactory(new PropertyValueFactory<>("HourlyWage"));
+        tHoursTableColumn.setCellValueFactory(new PropertyValueFactory<>("TotalHours"));
+        mWagesTableColumn.setCellValueFactory(new PropertyValueFactory<>("Salary"));
+        try {
+            updateTableView();
+        } catch (ListException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @javafx.fxml.FXML
     public void clearOnAction(ActionEvent actionEvent) {
+
         jobOptionTableview.getItems().clear();
+        try {
+            updateTableView();
+        } catch (ListException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @javafx.fxml.FXML
@@ -60,7 +70,7 @@ public class JobPositionController
             TextInputDialog dialog = new TextInputDialog();
             dialog.setTitle("Remove Job Position");
             dialog.setHeaderText("Enter Job Position ID:");
-            dialog.setContentText("ID:");
+            dialog.setContentText("Job:");
 
             dialog.showAndWait().ifPresent(input -> {
                 if (!Utility.isInteger(input)) {
@@ -68,20 +78,28 @@ public class JobPositionController
                     alert.setContentText("Invalid input. Please enter a valid job position ID.");
                 } else {
                     try {
-                        JobPosition job = new JobPosition(Integer.parseInt(input));
-                        if (jobpositionList.contains(job)) {
-                            jobpositionList.remove(job);
-                            Utility.setJobposition(jobpositionList);
-                            initialize();
-                            alert.setAlertType(Alert.AlertType.INFORMATION);
-                            alert.setContentText("The job position was removed successfully.");
-                        } else {
-                            alert.setAlertType(Alert.AlertType.ERROR);
-                            alert.setContentText("Job position does not exist or was already removed.");
-                        }
-                    } catch (ListException e) {
+                        int idToRemove = Integer.parseInt(input);
+                        for (int i = 1; i <= jobpositionList.size(); i++) {
+                            JobPosition current = (JobPosition) jobpositionList.getNode(i).data;
+                            if (current.getId()==idToRemove) {
+                                jobpositionList.remove(current);
+                                Utility.setJobposition(jobpositionList);
+                                jobOptionTableview.getItems().remove(current);
+                                alert.setAlertType(Alert.AlertType.INFORMATION);
+                                alert.setContentText("The Job position was removed successfully.");
+                            } else {
+                                alert.setAlertType(Alert.AlertType.ERROR);
+                                alert.setContentText("Job position does not exist or was already removed.");
+                            }
+                        }} catch (ListException e) {
                         alert.setAlertType(Alert.AlertType.ERROR);
                         alert.setContentText("Error removing job position: " + e.getMessage());
+
+                        try {
+                            updateTableView();
+                        } catch (ListException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                 }
                 alert.showAndWait();
@@ -94,9 +112,7 @@ public class JobPositionController
     }
 
     @javafx.fxml.FXML
-    public void addOnAction(ActionEvent actionEvent) {
-        FXUtility.loadPage(
-                "controller.JobPositionController", "jobpositionadd.fxml", bp);
+    public void addOnAction(ActionEvent actionEvent) {FXUtility.loadPage("ucr.lab.HelloApplication", "/ucr/lab/jobpositionadd.fxml", bp);
     }
 
     @javafx.fxml.FXML
@@ -258,6 +274,16 @@ public class JobPositionController
         } else {
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setContentText("The Table is Empty");
+        }
+    }
+
+    public void updateTableView() throws ListException {
+        this.jobOptionTableview.getItems().clear(); //clear table
+        this.jobpositionList = util.Utility.getJobposition(); //cargo la lista
+        if(jobpositionList!=null && !jobpositionList.isEmpty()){
+            for(int i=1; i<=jobpositionList.size(); i++) {
+                this.jobOptionTableview.getItems().add((JobPosition) jobpositionList.getNode(i).data);
+            }
         }
     }
 }

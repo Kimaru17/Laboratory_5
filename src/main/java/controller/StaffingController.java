@@ -148,7 +148,7 @@ public class StaffingController
         if(!this.staffingTableview.getItems().isEmpty()) {
             alert.setAlertType(Alert.AlertType.INFORMATION);
             try {
-                alert.setContentText("Current size of the job position list: " + staffingList.size());
+                alert.setContentText("Current size of the Staff list: " + staffingList.size());
             } catch (ListException e) {
                 throw new RuntimeException(e);
             }

@@ -36,39 +36,12 @@ public class Utility {
         supervisorList = new CircularLinkedList();
         jobPositionList = new CircularDoublyLinkedList();
         generateRandomSupervisors();
-        jobPositionList.add(new JobPosition(1,"aaaa",10));
-        jobPositionList.add(new JobPosition(2,"bbbb",10));
-        jobPositionList.add(new JobPosition(2,"cccc",10));
-        jobPositionList.add(new JobPosition(2,"dddd",10));
 
         assignTypeList.add("Promocion");
         assignTypeList.add("Transferencia");
         assignTypeList.add("Nuevo ingreso");
         assignTypeList.add("Temporal");
         assignTypeList.add("Otro");
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            Date birthday = sdf.parse("15/05/1990");
-            // Crear empleado
-            System.out.printf("hola");
-            Employee defaultEmployee = new Employee(
-                    8,              // id
-                    "García",       // lastName
-                    "Ana",          // firstName
-                    "Manager",      // title
-                    birthday        // birthday
-            );
-            Employee defaultEmployee2 = new Employee(
-                    5,              // id
-                    "Lopez",       // lastName
-                    "Mauricio",          // firstName
-                    "Manager",      // title
-                    birthday        // birthday
-            );
-            employeeList.add(defaultEmployee);employeeList.add(defaultEmployee2);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
     }
 
     private static void generateRandomSupervisors() {

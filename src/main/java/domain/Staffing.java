@@ -23,6 +23,10 @@ public class Staffing {
         this.assignmentType = assignmentType;
     }
 
+    public Staffing(int id){
+
+    }
+
     public int getId() {
         return id;
     }

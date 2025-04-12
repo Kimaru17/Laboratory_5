@@ -163,6 +163,7 @@ public class CircularDoublyLinkedList implements List {
 
     @Override
     public void sort() throws ListException {
+        System.out.println("Entra al sort");
         if(isEmpty())
             throw new ListException("Circular Doubly Linked List is empty");
         for (int i = 1; i<=size(); i++) {
@@ -270,4 +271,6 @@ public class CircularDoublyLinkedList implements List {
         //agregamos la info del último nodo
         return result+aux.data;
     }
+
+
 }

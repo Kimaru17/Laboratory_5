@@ -9,6 +9,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Utility {
     private static final Random random;
     private static CircularLinkedList employeeList;
@@ -17,6 +21,7 @@ public class Utility {
     private static CircularLinkedList assignTypeList;
     private static CircularLinkedList supervisorList;
     private static int staffId = 1 ;
+    public static String staffSorting = "";
     private static final String[] firstNames = {"Ana", "Carlos", "Lucía", "Pedro", "María", "Julio", "Antonio", "Pedro", "Felipe"};
     private static final String[] lastNames = {"García", "López", "Martínez", "Rodríguez", "Pérez", "Aguilar", "Cerdas", "Varela"};
 
@@ -31,11 +36,39 @@ public class Utility {
         supervisorList = new CircularLinkedList();
         jobPositionList = new CircularDoublyLinkedList();
         generateRandomSupervisors();
+        jobPositionList.add(new JobPosition(1,"aaaa",10));
+        jobPositionList.add(new JobPosition(2,"bbbb",10));
+        jobPositionList.add(new JobPosition(2,"cccc",10));
+        jobPositionList.add(new JobPosition(2,"dddd",10));
+
         assignTypeList.add("Promocion");
         assignTypeList.add("Transferencia");
         assignTypeList.add("Nuevo ingreso");
         assignTypeList.add("Temporal");
         assignTypeList.add("Otro");
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date birthday = sdf.parse("15/05/1990");
+            // Crear empleado
+            System.out.printf("hola");
+            Employee defaultEmployee = new Employee(
+                    8,              // id
+                    "García",       // lastName
+                    "Ana",          // firstName
+                    "Manager",      // title
+                    birthday        // birthday
+            );
+            Employee defaultEmployee2 = new Employee(
+                    5,              // id
+                    "Lopez",       // lastName
+                    "Mauricio",          // firstName
+                    "Manager",      // title
+                    birthday        // birthday
+            );
+            employeeList.add(defaultEmployee);employeeList.add(defaultEmployee2);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void generateRandomSupervisors() {
@@ -104,24 +137,46 @@ public class Utility {
     }
 
     public static int compare(Object a, Object b) {
-        switch(instanceOf(a, b)){
+        switch (instanceOf(a, b)) {
             case "Integer":
-                Integer int1 = (Integer)a; Integer int2 = (Integer)b;
+                Integer int1 = (Integer) a;
+                Integer int2 = (Integer) b;
                 return int1 < int2 ? -1 : int1 > int2 ? 1 : 0;
 
             case "String":
-                String str1 = (String)a; String str2 = (String)b;
+                String str1 = (String) a;
+                String str2 = (String) b;
                 return str1.compareTo(str2) < 0 ? -1 : str1.compareTo(str2) > 0 ? 1 : 0;
 
             case "Character":
-                Character ch1 = (Character) a; Character ch2 = (Character) b;
+                Character ch1 = (Character) a;
+                Character ch2 = (Character) b;
                 return ch1.compareTo(ch2) < 0 ? -1 : ch1.compareTo(ch2) > 0 ? 1 : 0;
 
             case "Employee":
-                Employee emp1 = (Employee) a; Employee emp2 = (Employee) b;
+                Employee emp1 = (Employee) a;
+                Employee emp2 = (Employee) b;
                 return emp1.getId() < emp2.getId() ? -1
-                        :  emp1.getId() > emp2.getId() ? 1 : 0;
+                        : emp1.getId() > emp2.getId() ? 1 : 0;
+            case "Staffing":
+                System.out.println("Entra a staffing");
+                Staffing staff1 = (Staffing) a;
+                Staffing staff2 = (Staffing) b;
+                switch (staffSorting) {
 
+                    case "JOB_POSITION":
+                        return staff1.getId() < staff2.getId() ? -1
+                                : staff1.getId() > staff2.getId() ? 1 : 0;
+                    case "EMPLOYEE_ID":
+                        return staff1.getEmployeeId() < staff2.getEmployeeId() ? -1
+                                : staff1.getEmployeeId() > staff2.getEmployeeId() ? 1 : 0;
+                    case "NAME":
+                        return staff1.getEmployeeName().compareTo(staff2.getEmployeeName()) < 0 ? -1
+                                : staff1.getEmployeeName().compareTo(staff2.getEmployeeName()) > 0 ? 1 : 0;
+                    case "TYPE":
+                        return staff1.getAssignmentType().compareTo(staff2.getAssignmentType()) < 0 ? -1
+                                : staff1.getAssignmentType().compareTo(staff2.getAssignmentType()) > 0 ? 1 : 0;
+                }
         }
         return 2; //Unknown
     }
@@ -139,6 +194,7 @@ public class Utility {
         if(a instanceof String && b instanceof String) return "String";
         if(a instanceof Character && b instanceof Character) return "Character";
         if(a instanceof Employee && b instanceof Employee) return "Employee";
+        if(a instanceof Staffing && b instanceof Staffing) return "Staffing";
         return "Unknown";
     }
     public static int getAge(Date date) {
